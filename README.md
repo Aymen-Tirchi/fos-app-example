@@ -1,24 +1,19 @@
-# fos-app-example
+# Vue.js Project
 
-## Project setup
-```
-npm install
-```
+## Technologies Used
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Vue.js: JavaScript framework for building the user interface.
+- Vuex: State management library for Vue.js applications.
+- BootstrapVue: UI library for styling the application.
+- LocalStorage: Browser API for storing anime data locally.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Installation
 
-### Lints and fixes files
-```
-npm run lint
-```
+1. Clone the repository: `git clone <repository-url>`
+2. Navigate to the project directory: `cd anime-list-project`
+3. Install dependencies: `npm install` or `yarn install`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Usage
+
+1. Start the development server: `npm run serve` or `yarn serve`
+2. Open your browser and visit: `http://localhost:8080`
