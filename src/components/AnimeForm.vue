@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="anime-form">
       <b-form-group id="input-group-1" label="Title:" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -34,17 +34,19 @@
         ></b-form-select>
       </b-form-group>
 
-      <b-form-group id="input-group-4" label="Image url:" label-for="input-4">
+      <b-form-group id="input-group-4" label="Image URL:" label-for="input-4">
         <b-form-input
           id="input-4"
           v-model="form.imgUrl"
-          placeholder="Enter an url for the cover image"
+          placeholder="Enter a URL for the cover image"
           type="url"
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <div class="form-buttons">
+        <b-button type="submit" variant="primary">{{ isEditMode ? 'Update' : 'Submit' }}</b-button>
+        <b-button type="reset" variant="danger">Reset</b-button>
+      </div>
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
@@ -54,14 +56,23 @@
 
 <script>
 export default {
+  props: {
+    anime: {
+      type: Object,
+      default: function () {
+        return {
+          id: null,
+          title: "",
+          episodes: 0,
+          status: null,
+          imgUrl: "",
+        };
+      },
+    },
+  },
   data() {
     return {
-      form: {
-        title: "",
-        episodes: 0,
-        status: null,
-        imgUrl: "",
-      },
+      form: { ...this.anime },
       statusOptions: [
         { text: "Select One", value: null },
         "OnGoing",
@@ -70,11 +81,20 @@ export default {
       show: true,
     };
   },
+  computed: {
+    isEditMode() {
+      return !!this.anime.id;
+    },
+  },
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
-      this.$store.dispatch("addAnime", { ...this.form });
+      if (this.isEditMode) {
+        this.$store.dispatch("updateAnime", { ...this.form });
+      } else {
+        this.$store.dispatch("addAnime", { ...this.form });
+      }
+      this.onReset(event);
     },
     onReset(event) {
       event.preventDefault();
@@ -93,5 +113,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.anime-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 </style>
