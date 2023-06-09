@@ -9,8 +9,8 @@
 
 ## Installation
 
-1. Clone the repository: `git clone <repository-url>`
-2. Navigate to the project directory: `cd anime-list-project`
+1. Clone the repository: `git clone https://github.com/Aymen-Tirchi/fos-app-example/tree/dev`
+2. Navigate to the project directory: `cd fos-app-example`
 3. Install dependencies: `npm install` or `yarn install`
 
 ## Usage
